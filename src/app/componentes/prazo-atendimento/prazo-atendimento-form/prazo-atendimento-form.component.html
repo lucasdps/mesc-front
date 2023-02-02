@@ -1,0 +1,55 @@
+<form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px; padding-left: 10px;">
+  <div class="form-row">
+    <div class="col-sm-12">
+      <label for="EscalaInicio">Escala Início</label>
+      <input type="number" class="form-control" id="EscalaInicio" placeholder="Escala Início"
+        formControlName="EscalaInicio" [ngClass]="{ 'is-invalid': submitted && hasError('EscalaInicio')}" />
+
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-sm-12">
+      <label for="EscalaFim">Escala Fim</label>
+      <input type="number" class="form-control" id="EscalaFim" placeholder="Escala Fim" formControlName="EscalaFim"
+        [ngClass]="{ 'is-invalid': submitted && hasError('EscalaFim')}" />
+
+    </div>
+  </div>
+
+
+  <div class="form-row">
+    <div class="col-sm-12">
+      <label for="DiasUteisNormal">Dias úteis Normais</label>
+      <input type="number" class="form-control" id="DiasUteisNormal" placeholder="Dias úteis Normais"
+        formControlName="DiasUteisNormal" [ngClass]="{ 'is-invalid': submitted && hasError('DiasUteisNormal')}" />
+
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-sm-12">
+      <label for="DiasUteisEmergencia">Dias úteis Emergência</label>
+      <input type="number" class="form-control" id="DiasUteisEmergencia" placeholder="Dias úteis Emergência"
+        formControlName="DiasUteisEmergencia"
+        [ngClass]="{ 'is-invalid': submitted && hasError('DiasUteisEmergencia')}" />
+
+    </div>
+  </div>
+
+
+  <div class="form-row">
+    <div class="col-sm-12">
+      <label for="TipoAtendimentoCodigo">Tipo de Atendimento</label>
+      <select type="text" class="form-control" id="TipoAtendimentoCodigo" formControlName="TipoAtendimentoCodigo">
+        <option *ngFor="let item of tipoAtendimentoList" [ngValue]="item.Codigo">{{item.Descricao}}</option>
+      </select>
+    </div>
+  </div>
+
+
+  <div style="margin-top: 10px">
+    <button type="sumit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+    <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+  </div>
+</form>

@@ -1,0 +1,86 @@
+<form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px; padding-left: 10px;">
+  <div class="col-sm-12">
+    <label for="CodigoSAP">Código SAP</label>
+    <input
+      type="text"
+      class="form-control"
+      id="CodigoSAP"
+      placeholder="Código SAP"
+      formControlName="CodigoSAP"
+      [ngClass]="{ 'is-invalid': submitted && hasError('CodigoSAP')}"
+    />
+    <div class="invalid-feedback" *ngIf="hasError('CodigoSAP') && hasError('CodigoSAP')['required']" >
+      Por favor informe um Codigo.
+    </div>
+    <div class="invalid-feedback" *ngIf="hasError('CodigoSAP') && hasError('CodigoSAP')['minlength']" >
+      Codigo precisa ter no mínimo {{ hasError('CodigoSAP')['minlength'].requiredLength }} caracteres.
+    </div>
+    <div class="invalid-feedback" *ngIf="hasError('CodigoSAP') && hasError('CodigoSAP')['maxlength']" >
+      Codigo precisa ter no máximo {{ hasError('CodigoSAP')['maxlength'].requiredLength }} caracteres.
+    </div>
+  </div>
+
+  <div class="col-sm-12">
+    <label for="Descricao">Descrição</label>
+    <input
+      type="text"
+      class="form-control"
+      id="descricao"
+      placeholder="Descrição"
+      formControlName="Descricao"
+      [ngClass]="{ 'is-invalid': submitted && hasError('Descricao')}"
+    />
+    <div class="invalid-feedback" *ngIf="hasError('Descricao') && hasError('Descricao')['required']" >
+      Por favor informe uma descrição.
+    </div>
+    <div class="invalid-feedback" *ngIf="hasError('Descricao') && hasError('Descricao')['minlength']" >
+      Descrição precisa ter no mínimo {{ hasError('Descricao')['minlength'].requiredLength }} caracteres.
+    </div>
+    <div class="invalid-feedback" *ngIf="hasError('Descricao') && hasError('Descricao')['maxlength']" >
+      Descrição precisa ter no máximo {{ hasError('Descricao')['maxlength'].requiredLength }} caracteres.
+    </div>
+  </div>
+
+  <div class="col-sm-12">
+    <label for="DescricaoSAP">Descrição do SAP</label>
+    <input
+      type="text"
+      class="form-control"
+      id="DescricaoSAP"
+      placeholder="Descrição SAP"
+      formControlName="DescricaoSAP"
+      [ngClass]="{ 'is-invalid': submitted && hasError('DescricaoSAP')}"
+    />
+    <div class="invalid-feedback" *ngIf="hasError('DescricaoSAP') && hasError('DescricaoSAP')['required']" >
+      Por favor informe uma descrição sap.
+    </div>
+    <div class="invalid-feedback" *ngIf="hasError('DescricaoSAP') && hasError('DescricaoSAP')['minlength']" >
+      Descrição sap precisa ter no mínimo {{ hasError('DescricaoSAP')['minlength'].requiredLength }} caracteres.
+    </div>
+    <div class="invalid-feedback" *ngIf="hasError('DescricaoSAP') && hasError('DescricaoSAP')['maxlength']" >
+      Descrição sap precisa ter no máximo {{ hasError('DescricaoSAP')['maxlength'].requiredLength }} caracteres.
+    </div>
+  </div>
+
+    <div class="col-sm-12">
+      <label for="CentroCodigo">Centro</label>
+      <select type="text" class="form-control" id="CentroCodigo" formControlName="CentroCodigo">
+        <option ></option>
+        <option *ngFor="let item of centroList" [ngValue]="item.Codigo">{{item.Codigo}}</option>
+      </select>
+    </div>
+
+    <div class="col-sm-12">
+      <label for="TipoAtendimentoCodigo">Tipo de Atendimento</label>
+      <select type="text" class="form-control" id="TipoAtendimentoCodigo" formControlName="TipoAtendimentoCodigo">
+        <option ></option>
+        <option *ngFor="let item of tipoAtendimentoList" [ngValue]="item.Codigo">{{item.Descricao}}</option>
+      </select>
+    </div>
+
+
+  <div style="margin-top: 10px">
+    <button type="sumit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+    <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+  </div>
+</form>

@@ -1,0 +1,932 @@
+<form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px; padding-left: 10px;">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mt-3">
+        <div class="card-header">
+          <div class="float-left">
+            <h3>Cabeçalho</h3>
+          </div>
+
+
+
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="col-sm-4">
+              <label for="tipoMaterial">TipoMaterial</label>
+              <select type="text" class="form-control" id="tipoMaterial" placeholder="TipoMaterial"
+                formControlName="tipoMaterial" [ngClass]="{ 'is-invalid': submitted && hasError('tipoMaterial')}">
+                <option value="1">Equipamento</option>
+                <option value="2">Ferramenta</option>
+                <option value="3">Sobressalente</option>
+              </select>
+
+
+            </div>
+
+            <div class="col-sm-4">
+              <label for="Assunto">Assunto</label>
+              <input type="text" class="form-control" id="Assunto" placeholder="Assunto" formControlName="assunto"
+                [ngClass]="{ 'is-invalid': submitted && hasError('assunto')}" />
+
+            </div>
+
+
+            <div class="col-sm-4">
+              <label for="numeroAS">AS</label>
+              <input type="text" class="form-control" id="numeroAS" placeholder="NumeroAS" formControlName="numeroAS"
+                [ngClass]="{ 'is-invalid': submitted && hasError('numeroAS')}" />
+
+            </div>
+          </div>
+
+
+          <div class="form-row">
+            <div class="col-sm-4">
+              <label for="numeroOrdem">Ordem</label>
+              <input type="text" class="form-control" id="numeroOrdem" placeholder="Observacao"
+                formControlName="numeroOrdem" [ngClass]="{ 'is-invalid': submitted && hasError('numeroOrdem')}" />
+
+            </div>
+
+            <div class="col-sm-4">
+              <label for="observacao">Observação</label>
+              <input type="text" class="form-control" id="observacao" placeholder="Observacao"
+                formControlName="observacao" [ngClass]="{ 'is-invalid': submitted && hasError('observacao')}" />
+
+            </div>
+
+            <div class="col-sm-4">
+              <label for="tipoCriticidade">Tipo de Criticidade</label>
+              <select (change)="onSetTipoCriticidade($event)"
+              type="text" class="form-control" id="tipoCriticidade" placeholder="TipoCriticidade"
+                formControlName="tipoCriticidade" [ngClass]="{ 'is-invalid': submitted && hasError('tipoCriticidade')}">
+                <option value="1">Normal</option>
+                <option value="2">Emergência</option>
+              </select>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mt-3">
+
+        <div class="card-body" style="overflow-x: scroll;">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#importacao">Importacao</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#selecao" (click)="RetornarEstoqueSAPPorNPNM()">Selecao</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#finalizacao" (click)="onFinalizar()">Finalizacao</a>
+            </li>
+          </ul>
+
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div id="importacao" class="container tab-pane active"><br>
+              <div class="form-row">
+                <div class="col-sm-12">
+                  <label for="tipoNpNm">NP ou NM?</label>
+                  <div class="form-check">
+                    <input (input)="rbNPNM=$event.target.value" class="form-check-input" type="radio" name="tipoNpNm"
+                      id="exampleRadios1" value="NP" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                      NP
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input (input)="rbNPNM=$event.target.value" class="form-check-input" type="radio" name="tipoNpNm"
+                      id="exampleRadios2" value="NM">
+                    <label class="form-check-label" for="exampleRadios2">
+                      NM
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-sm-12">
+                  <label>Importação de {{rbNPNM}} </label>
+                  <input type="file" (change)="onFileChange($event)" multiple="false" />
+
+
+                </div>
+              </div>
+
+              <div class="form-row" *ngIf="strNpNmSAP">
+                <div class="col-sm-4">
+
+                  <a class="btn btn-primary" href="{{strLinkNpNmSAP}}" target="_blank">SAPScript</a>
+                </div>
+                <div class="col-sm-4">
+                  <span class="btn btn-info" (click)="RetornarEstoqueSAPPorNPNM()"> Retornar Estoque SAP </span>
+                </div>
+              </div>
+            </div>
+            <div id="selecao" class="tab-pane fade"><br>
+
+
+
+              <div class="card mt-3">
+                <div class="card-header">
+                  <div class="float-left">
+                    <h3> Saldo SAP</h3>
+                  </div>
+
+                  <div class="float-right">
+                    <button type="button" class="btn btn-primary" (click)="onAdd(listSolRvt)">Novo</button>
+                    <button type="button" class="btn btn-secondary"
+                      (click)="RetornarEstoqueSAPPorNPNM()">Atualizar</button>
+                  </div>
+
+                </div>
+                <div class="card-body" style="overflow-x: scroll;">
+                  <table class="table table-hover" *ngIf="listSolRvt as solicitacoesRvt; else loading">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>NP</th>
+                        <th>NM</th>
+                        <th>Descrição</th>
+                        <th>Centro</th>
+                        <th>Gerência </th>
+                        <th>Depósito</th>
+                        <th>Local</th>
+                        <th>Saldo SAP</th>
+                        <th>Unidade</th>
+                        <th>Qtd Solicitada</th>
+                        <th>Observacao</th>
+                        <th>Justificativa</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of solicitacoesRvt">
+                        <td>
+                          <input (change)="onChange($event, 'check', item, solicitacoesRvt)" type="checkbox"
+                            class="form-control" id="check" />
+
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          <span *ngIf="item.sap;then np else np_input"></span>
+                          <ng-template #np>
+                            {{ item.np }}
+                          </ng-template>
+                          <ng-template #np_input>
+                            <input (change)="onChange($event, 'np', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="np" placeholder="np" />
+                          </ng-template>
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          <span *ngIf="item.sap;then nm else nm_input"></span>
+                          <ng-template #nm>
+                            {{ item.nm }}
+                          </ng-template>
+                          <ng-template #nm_input>
+                            <input (change)="onChange($event, 'nm', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="nm" placeholder="nm" />
+                          </ng-template>
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          <span *ngIf="item.sap;then descricao else descricao_input"></span>
+                          <ng-template #descricao>
+                            {{ item.descricao }}
+                          </ng-template>
+                          <ng-template #descricao_input>
+                            <input (change)="onChange($event, 'descricao', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="descricao" placeholder="descricao" />
+                          </ng-template>
+                        </td>
+
+
+                        <td style="min-width: 200px;">
+                          <span *ngIf="item.sap;then centro else centro_input"></span>
+                          {{getDescricaoCentro(item)}}
+                          <ng-template #centro>
+                            {{ item.centro }}
+                          </ng-template>
+                          <ng-template #centro_input>
+                            <select type="text" class="form-control" id="centro"
+                              (change)="onChange($event, 'centro', item, solicitacoesRvt ); ">
+                              <option></option>
+                              <option *ngFor="let c of listCentro" value="{{c.Codigo}}">{{c.DescricaoSAP}}</option>
+                            </select>
+                          </ng-template>
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          {{ item.gerenciaSolicitante }}
+                        </td>
+
+                        <td style="min-width: 200px;">
+                          <span *ngIf="item.sap;then deposito else deposito_input"></span>
+                          {{getDescricaoDeposito(item)}}
+                          <ng-template #deposito>
+                            {{ item.deposito }}
+                          </ng-template>
+                          <ng-template #deposito_input>
+                            <select type="text" class="form-control" id="deposito"
+                              (change)="onChange($event, 'deposito', item, solicitacoesRvt ); ">
+                              <option></option>
+                              <option *ngFor="let d of listDeposito" value="{{d.CodigoSAP}}">{{d.DescricaoSAP}}</option>
+                            </select>
+                          </ng-template>
+                        </td>
+                        <td style="min-width: 100px;"> {{ item.local }}</td>
+
+
+                        <td style="min-width: 100px;">
+                          <span *ngIf="item.sap;then saldoSAP else saldoSAP_input"></span>
+                          <ng-template #saldoSAP>
+                            {{ item.saldoSAP }}
+                          </ng-template>
+                          <ng-template #saldoSAP_input>
+                            <input (change)="onChange($event, 'saldoSAP', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="saldoSAP" placeholder="saldoSAPsaldoSAP" />
+                          </ng-template>
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          <span *ngIf="item.sap;then unidade else unidade_input"></span>
+                          <ng-template #unidade>
+                            {{ item.unidade }}
+                          </ng-template>
+                          <ng-template #unidade_input>
+                            <input (change)="onChange($event, 'unidade', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="unidade" placeholder="unidade" />
+                          </ng-template>
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          <input (change)="onChange($event, 'qtdSolicitada', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="qtdSolicitada" placeholder="qtdSolicitada"
+                              value="{{item.qtdSolicitada}}" />
+                        </td>
+
+
+                        <td style="min-width: 100px;">
+                          <input (change)="onChange($event, 'observacao', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="observacao" placeholder="observacao" />
+                        </td>
+                        <td style="min-width: 100px;">
+                          <input (change)="onChange($event, 'justificativaEmergencia', item, solicitacoesRvt)"
+                            type="text" class="form-control" id="justificativaEmergencia"
+                            placeholder="JustificativaEmergencia" />
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <ng-template #loading>
+                    <span>Carregando estoque...</span>
+                  </ng-template>
+                </div>
+              </div>
+
+
+              <div class="card mt-3">
+                <div class="card-header">
+                  <div class="float-left">
+                    <h3>Saldo SAP fora da Área de Atendimento</h3>
+                  </div>
+
+                  <div class="float-right">
+                    <button type="button" class="btn btn-primary" (click)="onAdd(listSolRvtForaArea)">Novo</button>
+                    <button type="button" class="btn btn-secondary"
+                      (click)="RetornarEstoqueSAPPorNPNM()">Atualizar</button>
+                  </div>
+
+                </div>
+                <div class="card-body" style="overflow-x: scroll;">
+                  <table class="table table-hover" *ngIf="listSolRvtForaArea as solicitacoesRvt; else loading">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>NP</th>
+                        <th>NM</th>
+                        <th>Descrição</th>
+                        <th>Centro</th>
+                        <th>Gerência </th>
+                        <th>Depósito</th>
+                        <th>Local</th>
+                        <th>Saldo SAP</th>
+                        <th>Unidade</th>
+                        <th>Qtd Solicitada</th>
+                        <th>Observacao</th>
+                        <th>Justificativa</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of solicitacoesRvt">
+                        <td>
+                          <input (change)="onChange($event, 'check', item,  solicitacoesRvt)" type="checkbox"
+                            class="form-control" id="check" />
+
+                        </td>
+
+                        <td>
+                          <span *ngIf="item.sap;then np else np_input"></span>
+                          <ng-template #np>
+                            {{ item.np }}
+                          </ng-template>
+                          <ng-template #np_input>
+                            <input (change)="onChange($event, 'np', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="np" placeholder="np" />
+                          </ng-template>
+                        </td>
+
+                        <td>
+                          <span *ngIf="item.nm;then nm else nm_input"></span>
+                          <ng-template #nm>
+                            {{ item.nm }}
+                          </ng-template>
+                          <ng-template #nm_input>
+                            <input (change)="onChange($event, 'nm', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="nm" placeholder="nm" />
+                          </ng-template>
+                        </td>
+
+                        <td>
+                          <span *ngIf="item.descricao;then descricao else descricao_input"></span>
+                          <ng-template #descricao>
+                            {{ item.descricao }}
+                          </ng-template>
+                          <ng-template #descricao_input>
+                            <input (change)="onChange($event, 'descricao', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="descricao" placeholder="descricao" />
+                          </ng-template>
+                        </td>
+
+
+                        <td>
+                          <span *ngIf="item.sap;then centro else centro_input"></span>
+                          {{getDescricaoCentro(item)}}
+                          <ng-template #centro>
+                            {{ item.centro }}
+                          </ng-template>
+                          <ng-template #centro_input>
+                            <select type="text" class="form-control" id="centro"
+                              (change)="onChange($event, 'centro', item , solicitacoesRvt); ">
+                              <option *ngFor="let c of listCentro" value="{{c.Codigo}}">{{c.DescricaoSAP}}</option>
+                            </select>
+                          </ng-template>
+                        </td>
+
+                        <td>
+                          {{ item.gerenciaSolicitante }}
+                        </td>
+
+
+                        <td>
+                          <span *ngIf="item.sap;then deposito else deposito_input"></span>
+                          {{getDescricaoDeposito(item)}}
+                          <ng-template #deposito>
+                            {{ item.deposito }}
+                          </ng-template>
+                          <ng-template #deposito_input>
+                            <select type="text" class="form-control" id="deposito"
+                              (change)="onChange($event, 'deposito', item , solicitacoesRvt); ">
+                              <option *ngFor="let d of listDeposito" value="{{d.CodigoSAP}}">{{d.DescricaoSAP}}</option>
+                            </select>
+                          </ng-template>
+                        </td>
+                        <td> {{item.local }}</td>
+
+
+                        <td>
+                          <span *ngIf="item.saldoSAP;then saldoSAP else saldoSAP_input"></span>
+                          <ng-template #saldoSAP>
+                            {{ item.saldoSAP }}
+                          </ng-template>
+                          <ng-template #saldoSAP_input>
+                            <input (change)="onChange($event, 'saldoSAP', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="saldoSAP" placeholder="saldoSAPsaldoSAP" />
+                          </ng-template>
+                        </td>
+
+                        <td>
+                          <span *ngIf="item.unidade;then unidade else unidade_input"></span>
+                          <ng-template #unidade>
+                            {{ item.unidade }}
+                          </ng-template>
+                          <ng-template #unidade_input>
+                            <input (change)="onChange($event, 'unidade', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="unidade" placeholder="unidade" />
+                          </ng-template>
+                        </td>
+
+                        <td>
+                          <span *ngIf="item.qtdSolicitada;then qtdSolicitada else qtdSolicitada_input"></span>
+                          <ng-template #qtdSolicitada>
+                            {{ item.qtdSolicitada }}
+                          </ng-template>
+                          <ng-template #qtdSolicitada_input>
+                            <input (change)="onChange($event, 'qtdSolicitada', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="qtdSolicitada" placeholder="qtdSolicitada"
+                              value="{{item.saldoSAP}}" />
+                          </ng-template>
+                        </td>
+
+
+                        <td>
+                          <input (change)="onChange($event, 'observacao', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="observacao" placeholder="observacao" />
+                        </td>
+                        <td>
+                          <input (change)="onChange($event, 'justificativaEmergencia', item, solicitacoesRvt)"
+                            type="text" class="form-control" id="justificativaEmergencia"
+                            placeholder="JustificativaEmergencia" />
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <ng-template #loading>
+                    <span>Carregando estoque...</span>
+                  </ng-template>
+
+                </div>
+              </div>
+
+
+
+              <div class="card mt-3">
+                <div class="card-header">
+                  <div class="float-left">
+                    <h3>Saldo SAP Não encontrado</h3>
+                  </div>
+
+                  <div class="float-right">
+                    <button type="button" class="btn btn-primary" (click)="onAdd(listSolRvtNaoEncontrado)">Novo</button>
+                    <button type="button" class="btn btn-secondary"
+                      (click)="RetornarEstoqueSAPPorNPNM()">Atualizar</button>
+                  </div>
+
+                </div>
+                <div class="card-body" style="overflow-x: scroll;">
+                  <table class="table table-hover" *ngIf="listSolRvtNaoEncontrado as solicitacoesRvt; else loading">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>NP</th>
+                        <th>NM</th>
+                        <th>Descrição</th>
+                        <th>Centro</th>
+                        <th>Gerência</th>
+                        <th>Depósito</th>
+                        <th>Local</th>
+                        <th>Saldo SAP</th>
+                        <th>Unidade</th>
+                        <th>Qtd Solicitada</th>
+                        <th>Observacao</th>
+                        <th>Justificativa</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of solicitacoesRvt">
+                        <td>
+                          <input (change)="onChange($event, 'check', item, solicitacoesRvt)" type="checkbox"
+                            class="form-control" id="check" />
+
+                        </td>
+
+                        <td>
+                          <span *ngIf="item.np;then np else np_input"></span>
+                          <ng-template #np>
+                            {{ item.np }}
+                          </ng-template>
+                          <ng-template #np_input>
+                            <input (change)="onChange($event, 'np', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="np" placeholder="np" />
+                          </ng-template>
+                        </td>
+
+                        <td>
+                          <span *ngIf="item.nm;then nm else nm_input"></span>
+                          <ng-template #nm>
+                            {{ item.nm }}
+                          </ng-template>
+                          <ng-template #nm_input>
+                            <input (change)="onChange($event, 'nm', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="nm" placeholder="nm" />
+                          </ng-template>
+                        </td>
+
+                        <td>
+                          <span *ngIf="item.descricao;then descricao else descricao_input"></span>
+                          <ng-template #descricao>
+                            {{ item.descricao }}
+                          </ng-template>
+                          <ng-template #descricao_input>
+                            <input (change)="onChange($event, 'descricao', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="descricao" placeholder="descricao" />
+                          </ng-template>
+                        </td>
+
+
+                        <td>
+                          <span *ngIf="item.sap;then centro else centro_input"></span>
+                          {{getDescricaoCentro(item)}}
+                          <ng-template #centro>
+                            {{ item.centro }}
+                          </ng-template>
+                          <ng-template #centro_input>
+                            <select type="text" class="form-control" id="centro"
+                              (change)="onChange($event, 'centro', item, solicitacoesRvt ); ">
+                              <option *ngFor="let c of listCentro" value="{{c.Codigo}}">{{c.DescricaoSAP}}</option>
+                            </select>
+                          </ng-template>
+                        </td>
+
+                        <td>
+                          {{ item.gerenciaSolicitante }}
+                        </td>
+
+
+                        <td>
+                          <span *ngIf="item.sap;then deposito else deposito_input"></span>
+                          {{getDescricaoDeposito(item)}}
+                          <ng-template #deposito>
+                            {{ item.deposito }}
+                          </ng-template>
+                          <ng-template #deposito_input>
+                            <select type="text" class="form-control" id="deposito"
+                              (change)="onChange($event, 'deposito', item , solicitacoesRvt); ">
+                              <option *ngFor="let d of listDeposito" value="{{d.CodigoSAP}}">{{d.DescricaoSAP}}</option>
+                            </select>
+                          </ng-template>
+                        </td>
+                        <td> {{ item.local }}</td>
+
+
+                        <td>
+                          <span *ngIf="item.saldoSAP;then saldoSAP else saldoSAP_input"></span>
+                          <ng-template #saldoSAP>
+                            {{ item.saldoSAP }}
+                          </ng-template>
+                          <ng-template #saldoSAP_input>
+                            <input (change)="onChange($event, 'saldoSAP', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="saldoSAP" placeholder="saldoSAPsaldoSAP" />
+                          </ng-template>
+                        </td>
+
+                        <td>
+                          <span *ngIf="item.unidade;then unidade else unidade_input"></span>
+                          <ng-template #unidade>
+                            {{ item.unidade }}
+                          </ng-template>
+                          <ng-template #unidade_input>
+                            <input (change)="onChange($event, 'unidade', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="unidade" placeholder="unidade" />
+                          </ng-template>
+                        </td>
+
+                        <td>
+                          <span *ngIf="item.qtdSolicitada;then qtdSolicitada else qtdSolicitada_input"></span>
+                          <ng-template #qtdSolicitada>
+                            {{ item.qtdSolicitada }}
+                          </ng-template>
+                          <ng-template #qtdSolicitada_input>
+                            <input (change)="onChange($event, 'qtdSolicitada', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="qtdSolicitada" placeholder="qtdSolicitada"
+                              value="{{item.saldoSAP}}" />
+                          </ng-template>
+                        </td>
+
+
+                        <td>
+                          <input (change)="onChange($event, 'observacao', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="observacao" placeholder="observacao" />
+                        </td>
+                        <td>
+                          <input (change)="onChange($event, 'justificativaEmergencia', item, solicitacoesRvt)"
+                            type="text" class="form-control" id="justificativaEmergencia"
+                            placeholder="JustificativaEmergencia" />
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <ng-template #loading>
+                    <span>Carregando estoque...</span>
+                  </ng-template>
+
+                </div>
+              </div>
+
+            </div>
+
+
+            <div id="finalizacao" class="tab-pane fade"><br>
+
+              <div class="card mt-3">
+                <div class="card-header">
+                  <div class="float-left">
+                    <h3> Saldo SAP</h3>
+                  </div>
+
+                  <div class="float-right">
+                    <button type="button" class="btn btn-primary" (click)="onAdd(listSolRvtCompilado)">Novo</button>
+                    <button type="button" class="btn btn-secondary"
+                      (click)="RetornarEstoqueSAPPorNPNM()">Atualizar</button>
+                  </div>
+
+                </div>
+                <div class="card-body" style="overflow-x: scroll;">
+                  <table class="table table-hover" *ngIf="listSolRvtCompilado as solicitacoesRvt; else loading">
+                    <thead>
+                      <tr>
+                        <th>Data Prazo Atendimento</th>
+                        <th>Assunto</th>
+                        <th>NP</th>
+                        <th>NM</th>
+                        <th>Descrição</th>
+                        <th>Tipo material</th>
+                        <th>Reserva</th>
+                        <th>Item da Reserva</th>
+                        <th>Centro</th>
+                        <th>Gerência </th>
+                        <th>Depósito</th>
+                        <th>Local</th>
+                        <th>Saldo SAP</th>
+                        <th>Unidade</th>
+                        <th>Qtd Solicitada</th>
+                        <th>NS/TAG</th>
+                        <th>BP</th>
+                        <th>AS</th>
+                        <th>OM</th>
+                        <th>Observacao</th>
+                        <th>Tipo Criticidades</th>
+                        <th>Status Sol.</th>
+                        <th>Data Sol.</th>
+
+                        <th>Justificativa</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of solicitacoesRvt">
+
+
+                        <td>
+                          <input (change)="onChange($event, 'dataPrazoAtendimento', item, solicitacoesRvt)" type="date"
+                            class="form-control" id="dataPrazoAtendimento" value="{{item.dataPrazoAtendimento.toISOString().split('T')[0]}}" />
+
+                        </td>
+
+                        <td>
+                          <input (change)="onChange($event, 'assunto', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="assunto" value="{{item.assunto}}" />
+
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          <span *ngIf="item.sap;then np else np_input"></span>
+                          <ng-template #np>
+                            {{ item.np }}
+                          </ng-template>
+                          <ng-template #np_input>
+                            <input (change)="onChange($event, 'np', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="np" placeholder="np" value="{{item.np}}"/>
+                          </ng-template>
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          <span *ngIf="item.sap;then nm else nm_input"></span>
+                          <ng-template #nm>
+                            {{ item.nm }}
+                          </ng-template>
+                          <ng-template #nm_input>
+                            <input (change)="onChange($event, 'nm', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="nm" placeholder="nm" value="{{item.nm}}"/>
+                          </ng-template>
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          <span *ngIf="item.sap;then descricao else descricao_input"></span>
+                          <ng-template #descricao>
+                            {{ item.descricao }}
+                          </ng-template>
+                          <ng-template #descricao_input>
+                            <input (change)="onChange($event, 'descricao', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="descricao" placeholder="descricao" value="{{item.descricao}}" />
+                          </ng-template>
+                        </td>
+
+                        <td>
+                          <input (change)="onChange($event, 'tipoMaterial', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="tipoMaterial" value="{{item.tipoMaterial}}" />
+
+                        </td>
+
+
+                        <td>
+                          <input (change)="onChange($event, 'reserva', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="reserva" value="{{item.reserva}}" />
+
+                        </td>
+
+                        <td>
+                          <input (change)="onChange($event, 'itemReserva', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="itemReserva" value="{{item.itemReserva}}" />
+
+                        </td>
+
+
+                        <td style="min-width: 200px;">
+                          <span *ngIf="item.centro;then centro else centro_input"></span>
+                          {{getDescricaoCentro(item)}}
+                          <ng-template #centro>
+                            {{ item.centro }}
+                          </ng-template>
+                          <ng-template #centro_input>
+                            <select type="text" class="form-control" id="centro"
+                              (change)="onChange($event, 'centro', item, solicitacoesRvt ); ">
+                              <option></option>
+                              <option *ngFor="let c of listCentro" value="{{c.Codigo}}">{{c.DescricaoSAP}}</option>
+                            </select>
+                          </ng-template>
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          {{ item.gerenciaSolicitante }}
+                        </td>
+
+
+                        <td style="min-width: 200px;">
+                          <span *ngIf="item.deposito;then deposito else deposito_input"></span>
+                          {{getDescricaoDeposito(item)}}
+                          <ng-template #deposito>
+                            {{ item.deposito }}
+                          </ng-template>
+                          <ng-template #deposito_input>
+                            <select type="text" class="form-control" id="deposito"
+                              (change)="onChange($event, 'deposito', item, solicitacoesRvt ); ">
+                              <option></option>
+                              <option *ngFor="let d of listDeposito" value="{{d.CodigoSAP}}">{{d.DescricaoSAP}}</option>
+                            </select>
+                          </ng-template>
+                        </td>
+                        <td style="min-width: 100px;"> {{ item.local }}</td>
+
+
+                        <td style="min-width: 100px;">
+                          <span *ngIf="item.sap;then saldoSAP else saldoSAP_input"></span>
+                          <ng-template #saldoSAP>
+                            {{ item.saldoSAP }}
+                          </ng-template>
+                          <ng-template #saldoSAP_input>
+                            <input (change)="onChange($event, 'saldoSAP', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="saldoSAP" placeholder="saldoSAP" value="{{item.saldoSAP}}" />
+                          </ng-template>
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          <span *ngIf="item.sap;then unidade else unidade_input"></span>
+                          <ng-template #unidade>
+                            {{ item.unidade }}
+                          </ng-template>
+                          <ng-template #unidade_input>
+                            <input (change)="onChange($event, 'unidade', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="unidade" placeholder="unidade" value="{{item.unidade}}"/>
+                          </ng-template>
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          <input (change)="onChange($event, 'qtdSolicitada', item, solicitacoesRvt)" type="text"
+                              class="form-control" id="qtdSolicitada" placeholder="qtdSolicitada"
+                              value="{{item.qtdSolicitada}}" />
+                        </td>
+
+
+                        <td>
+                          <input (change)="onChange($event, 'ns', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="ns" value="{{item.ns}}" />
+
+                        </td>
+                        <td>
+                          <input (change)="onChange($event, 'bp', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="bp" value="{{item.bp}}" />
+
+                        </td>
+
+                        <td>
+                          <input (change)="onChange($event, 'numeroAS', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="numeroAS" value="{{item.numeroAS}}" />
+
+                        </td>
+
+                        <td>
+                          <input (change)="onChange($event, 'numeroOrdem', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="numeroOrdem" value="{{item.numeroOrdem}}" />
+
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          <input (change)="onChange($event, 'observacao', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="observacao" placeholder="observacao" value="{{item.observacao}}"/>
+                        </td>
+
+                        <td>
+                          <input (change)="onChange($event, 'tipoCriticidade', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="tipoCriticidade" value="{{item.tipoCriticidade}}" />
+
+                        </td>
+
+                        <td>
+                          <input (change)="onChange($event, 'statusSolicitacao', item, solicitacoesRvt)" type="text"
+                            class="form-control" id="statusSolicitacao" value="{{item.statusSolicitacao}}" />
+
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          <input (change)="onChange($event, 'dataSolicitacao', item, solicitacoesRvt);onCalculaPrazoAtendimento();" type="date"
+                            class="form-control" id="dataSolicitacao" value="{{item.dataSolicitacao.toISOString().split('T')[0]}}" />
+
+                        </td>
+
+                        <td style="min-width: 100px;">
+                          <input (change)="onChange($event, 'justificativaEmergencia', item, solicitacoesRvt)"
+                            type="text" class="form-control" id="justificativaEmergencia"
+                            placeholder="JustificativaEmergencia" value="{{item.justificativaEmergencia}}"/>
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <ng-template #loading>
+                    <span>Carregando estoque...</span>
+                  </ng-template>
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <hr />
+  <div style="margin-top: 10px">
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+    <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+  </div>
+</form>

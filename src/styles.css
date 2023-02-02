@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+.no-margin{
+    margin-bottom: 0;
+}
+body {
+	font-family: 'Trebuchet MS';
+}
+.navbar {
+  min-height: 72px;
+}
+.nav-bar-logo {
+    background-color: white;
+    background-image:  url("assets/img/header_petrobras_azul_v0.png");
+    background-repeat: no-repeat;
+
+   }
+
+  #linha-logo{
+  background:  url("assets/img/linha-logo.png");
+  background-repeat: no-repeat;
+  background-position: 3px 45px ;
+  }
+
+  .custom-icon-white{
+    margin-left: 40px;
+    margin-top: 0px;
+    bottom: 40px;
+    font-size: 30px;
+    color: white;
+  }
+  .texto-linha-logo{
+    color: white;
+    font-size: 35px;
+    font-style: normal;
+    margin-left: 10px;
+    margin-top: -6px;
+  }
+
+.modal-lg{
+    max-width: 80% !important;
+    width: 80% !important;
+  }

@@ -1,0 +1,54 @@
+<form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px; padding-left: 10px;">
+  <div class="form-row">
+
+    <div class="col-sm-12">
+      <label for="Codigo">Código</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Codigo"
+        placeholder="Código"
+        formControlName="Codigo"
+        [ngClass]="{ 'is-invalid': submitted && hasError('Codigo')}"
+      />
+      <div class="invalid-feedback" *ngIf="hasError('Codigo') && hasError('Codigo')['required']" >
+        Por favor informe um Codigo.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('Codigo') && hasError('Codigo')['minlength']" >
+        Codigo precisa ter no mínimo {{ hasError('Codigo')['minlength'].requiredLength }} caracteres.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('Codigo') && hasError('Codigo')['maxlength']" >
+        Codigo precisa ter no máximo {{ hasError('Codigo')['maxlength'].requiredLength }} caracteres.
+      </div>
+    </div>
+
+    <div class="col-sm-12">
+      <label for="Descricao">Descrição</label>
+      <input
+        type="text"
+        class="form-control"
+        id="descricao"
+        placeholder="Descrição"
+        formControlName="Descricao"
+        [ngClass]="{ 'is-invalid': submitted && hasError('Descricao')}"
+      />
+      <div class="invalid-feedback" *ngIf="hasError('Descricao') && hasError('Descricao')['required']" >
+        Por favor informe uma descrição.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('Descricao') && hasError('Descricao')['minlength']" >
+        Descrição precisa ter no mínimo {{ hasError('Descricao')['minlength'].requiredLength }} caracteres.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('Descricao') && hasError('Descricao')['maxlength']" >
+        Descrição precisa ter no máximo {{ hasError('Descricao')['maxlength'].requiredLength }} caracteres.
+      </div>
+    </div>
+
+
+
+  </div>
+  <div style="margin-top: 10px">
+    <button type="sumit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+    <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+  </div>
+</form>
+

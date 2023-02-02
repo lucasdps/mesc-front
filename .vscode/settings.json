@@ -1,0 +1,11 @@
+{
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+    "angular.view-engine": true,
+    "js/ts.implicitProjectConfig.experimentalDecorators": true,
+    "typescript.validate.enable": true,
+    "emmet.excludeLanguages": [
+
+        "markdown"
+    ]
+}

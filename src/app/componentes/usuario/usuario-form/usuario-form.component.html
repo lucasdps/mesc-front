@@ -1,0 +1,106 @@
+<form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px; padding-left: 10px;">
+  <div class="form-row">
+    <div class="col-sm-12">
+      <label for="nome">Nome</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nome"
+        placeholder="Nome"
+        formControlName="nome"
+        [ngClass]="{ 'is-invalid': submitted && hasError('nome')}"
+      />
+      <div class="invalid-feedback" *ngIf="hasError('nome') && hasError('nome')['required']" >
+        campo obrigatório.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('nome') && hasError('nome')['minlength']" >
+        Mínimo de {{ hasError('nome')['minlength'].requiredLength }} caracteres.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('nome') && hasError('nome')['maxlength']" >
+        Máximo de {{ hasError('nome')['maxlength'].requiredLength }} caracteres.
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-row">
+    <div class="col-sm-12">
+      <label for="chave">Chave</label>
+      <input
+        type="text"
+        class="form-control"
+        id="chave"
+        placeholder="chave"
+        formControlName="chave"
+        [ngClass]="{ 'is-invalid': submitted && hasError('chave')}"
+      />
+      <div class="invalid-feedback" *ngIf="hasError('chave') && hasError('chave')['required']" >
+        campo obrigatório.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('chave') && hasError('chave')['minlength']" >
+        Mínimo de {{ hasError('chave')['minlength'].requiredLength }} caracteres.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('chave') && hasError('chave')['maxlength']" >
+        Máximo de {{ hasError('chave')['maxlength'].requiredLength }} caracteres.
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-row">
+    <div class="col-sm-12">
+      <label for="gerencia">Gerência</label>
+      <input
+        type="text"
+        class="form-control"
+        id="gerencia"
+        placeholder="gerencia"
+        formControlName="gerencia"
+        [ngClass]="{ 'is-invalid': submitted && hasError('gerencia')}"
+      />
+      <div class="invalid-feedback" *ngIf="hasError('gerencia') && hasError('gerencia')['required']" >
+        campo obrigatório.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('gerencia') && hasError('gerencia')['minlength']" >
+        Mínimo de {{ hasError('gerencia')['minlength'].requiredLength }} caracteres.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('gerencia') && hasError('gerencia')['maxlength']" >
+        Máximo de {{ hasError('gerencia')['maxlength'].requiredLength }} caracteres.
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-row">
+    <div class="col-sm-12">
+      <label for="perfl">Perfil</label>
+      <input
+        type="text"
+        class="form-control"
+        id="perfil"
+        placeholder="perfil"
+        formControlName="perfil"
+        [ngClass]="{ 'is-invalid': submitted && hasError('perfil')}"
+      />
+      <div class="invalid-feedback" *ngIf="hasError('perfil') && hasError('perfil')['required']" >
+        campo obrigatório.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('perfil') && hasError('perfil')['minlength']" >
+        Mínimo de {{ hasError('perfil')['minlength'].requiredLength }} caracteres.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('perfil') && hasError('perfil')['maxlength']" >
+        Máximo de {{ hasError('perfil')['maxlength'].requiredLength }} caracteres.
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div style="margin-top: 10px">
+    <button type="sumit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+    <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+  </div>
+</form>
+

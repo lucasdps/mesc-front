@@ -1,0 +1,24 @@
+/*
+  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
+  It is not intended to be used to perform a compilation.
+
+  To learn more about this file see: https://angular.io/config/solution-tsconfig.
+*/
+{
+  "experimentalDecorators": true, /* Enables experimental support for ES7 decorators. */
+  "emitDecoratorMetadata": true, /* Enables experimental support for emitting type metadata for decorators. */
+  "outDir": "./dist" /*   ./dist      Redirect output structure to the directory. */,
+  "rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./e2e/tsconfig.json"
+    }
+  ]
+}

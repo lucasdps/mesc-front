@@ -1,0 +1,7 @@
+table {
+  border-spacing: 10px;
+  border-collapse: separate;
+}
+td {
+  padding: 30px;
+}

@@ -1,0 +1,37 @@
+<form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px; padding-left: 10px;">
+  <div class="form-row">
+    <div class="col-sm-12">
+      <label for="descricao">Descrição</label>
+      <input
+        type="text"
+        class="form-control"
+        id="descricao"
+        placeholder="Descrição"
+        formControlName="descricao"
+        [ngClass]="{ 'is-invalid': submitted && hasError('descricao')}"
+      />
+      <div class="invalid-feedback" *ngIf="hasError('descricao') && hasError('descricao')['required']" >
+        Por favor informe uma descrição.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('descricao') && hasError('descricao')['minlength']" >
+        Descrição precisa ter no mínimo {{ hasError('descricao')['minlength'].requiredLength }} caracteres.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('descricao') && hasError('descricao')['maxlength']" >
+        Descrição precisa ter no máximo {{ hasError('descricao')['maxlength'].requiredLength }} caracteres.
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="canteiro"formControlName="canteiro" >
+    <label class="form-check-label" for="canteiro">É canteiro de manutenção?</label>
+  </div>
+
+
+  <div style="margin-top: 10px">
+    <button type="sumit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+    <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+  </div>
+</form>
+

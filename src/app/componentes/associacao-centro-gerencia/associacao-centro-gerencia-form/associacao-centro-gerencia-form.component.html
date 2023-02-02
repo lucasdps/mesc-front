@@ -1,0 +1,79 @@
+<form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px; padding-left: 10px;">
+  <div class="form-row">
+
+    <div class="col-sm-4">
+      <label for="centro">Centro</label>
+      <input
+        type="text"
+        class="form-control"
+        id="centro"
+        placeholder="Centro"
+        formControlName="centro"
+        [ngClass]="{ 'is-invalid': submitted && hasError('centro')}"
+      />
+      <div class="invalid-feedback" *ngIf="hasError('centro') && hasError('centro')['required']" >
+        Por favor informe uma descrição.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('centro') && hasError('centro')['minlength']" >
+        centro precisa ter no mínimo {{ hasError('centro')['minlength'].requiredLength }} caracteres.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('centro') && hasError('centro')['maxlength']" >
+        centro precisa ter no máximo {{ hasError('centro')['maxlength'].requiredLength }} caracteres.
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <label for="centroDescricao">Descrição do Centro</label>
+      <input
+        type="text"
+        class="form-control"
+        id="centroDescricao"
+        placeholder="centroDescricao"
+        formControlName="centroDescricao"
+        [ngClass]="{ 'is-invalid': submitted && hasError('centroDescricao')}"
+      />
+      <div class="invalid-feedback" *ngIf="hasError('centroDescricao') && hasError('centroDescricao')['required']" >
+        Por favor informe uma descrição.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('centroDescricao') && hasError('centroDescricao')['minlength']" >
+        descrição do centro precisa ter no mínimo {{ hasError('centroDescricao')['minlength'].requiredLength }} caracteres.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('centroDescricao') && hasError('centroDescricao')['maxlength']" >
+        descrição do centro precisa ter no máximo {{ hasError('centroDescricao')['maxlength'].requiredLength }} caracteres.
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <label for="gerencia">Gerência</label>
+      <input
+        type="text"
+        class="form-control"
+        id="gerencia"
+        placeholder="gerencia"
+        formControlName="gerencia"
+        [ngClass]="{ 'is-invalid': submitted && hasError('gerencia')}"
+      />
+      <div class="invalid-feedback" *ngIf="hasError('gerencia') && hasError('gerencia')['required']" >
+        Por favor informe uma descrição.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('gerencia') && hasError('gerencia')['minlength']" >
+        descrição do centro precisa ter no mínimo {{ hasError('gerencia')['minlength'].requiredLength }} caracteres.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('gerencia') && hasError('gerencia')['maxlength']" >
+        descrição do centro precisa ter no máximo {{ hasError('gerencia')['maxlength'].requiredLength }} caracteres.
+      </div>
+    </div>
+
+
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="areaAtendida" formControlName="areaAtendida" >
+      <label class="form-check-label" for="areaAtendida">Área de atendimento?</label>
+    </div>
+  </div>
+  <div style="margin-top: 10px">
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+    <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+  </div>
+</form>
+
+

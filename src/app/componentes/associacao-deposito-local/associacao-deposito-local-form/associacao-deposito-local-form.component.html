@@ -1,0 +1,53 @@
+<form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px; padding-left: 10px;">
+  <div class="form-row">
+    <div class="col-sm-6">
+      <label for="deposito">Depósito</label>
+      <input
+        type="text"
+        class="form-control"
+        id="deposito"
+        placeholder="deposito"
+        formControlName="deposito"
+        [ngClass]="{ 'is-invalid': submitted && hasError('deposito')}"
+      />
+      <div class="invalid-feedback" *ngIf="hasError('deposito') && hasError('deposito')['required']" >
+        Por favor informe um depósito.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('deposito') && hasError('deposito')['minlength']" >
+        descrição do centro precisa ter no mínimo {{ hasError('deposito')['minlength'].requiredLength }} caracteres.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('deposito') && hasError('deposito')['maxlength']" >
+        descrição do centro precisa ter no máximo {{ hasError('deposito')['maxlength'].requiredLength }} caracteres.
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <label for="local">Local</label>
+      <input
+        type="text"
+        class="form-control"
+        id="local"
+        placeholder="local"
+        formControlName="local"
+        [ngClass]="{ 'is-invalid': submitted && hasError('local')}"
+      />
+      <div class="invalid-feedback" *ngIf="hasError('local') && hasError('local')['required']" >
+        Por favor informe um local.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('local') && hasError('local')['minlength']" >
+        mínimo {{ hasError('local')['minlength'].requiredLength }} caracteres.
+      </div>
+      <div class="invalid-feedback" *ngIf="hasError('local') && hasError('local')['maxlength']" >
+        máximo {{ hasError('local')['maxlength'].requiredLength }} caracteres.
+      </div>
+    </div>
+
+
+  </div>
+  <div style="margin-top: 10px">
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+    <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+  </div>
+</form>
+
+

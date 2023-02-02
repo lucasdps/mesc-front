@@ -1,0 +1,132 @@
+<div class="card-mt12">
+  <div class="card-header">
+    <div class="float-left">
+      <h3>Solicitação RVT ({{solicitacao.Id}})</h3>
+    </div>
+    <div class="float-right">
+      <button type="button" class="btn btn-warning" (click)="onEditSolicitacao()">Editar</button>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="card-body">
+    <div class="form-row">
+      <div class="col-sm-4">
+        <label for="TipoMaterial">Tipo Material</label>
+        <select type="text" class="form-control" id="TipoMaterial" value="{{solicitacao.TipoMaterial}}" readonly>
+          <option value="E" selected>Equipamento</option>
+          <option value="F">Ferramenta</option>
+          <option value="S">Sobressalente</option>
+        </select>
+
+
+      </div>
+
+      <div class="col-sm-4">
+        <label for="Assunto">Assunto</label>
+        <input type="text" class="form-control" id="Assunto" placeholder="Assunto"   value="{{solicitacao.Assunto}}" readonly/>
+
+      </div>
+
+
+      <div class="col-sm-4">
+        <label for="As">AS</label>
+        <input type="text" class="form-control" id="As" placeholder="As"  value="{{solicitacao.As}}" readonly/>
+
+      </div>
+
+
+      <div class="col-sm-4">
+        <label for="Om">Ordem</label>
+        <input type="text" class="form-control" id="Om" placeholder="Om"  value="{{solicitacao.Om}}" readonly
+         />
+
+      </div>
+
+      <div class="col-sm-4">
+        <label for="Observacao">Observação</label>
+        <input type="text" class="form-control" id="observacao" placeholder="Observacao"  value="{{solicitacao.Observacao}}" readonly/>
+
+      </div>
+
+      <div class="col-sm-4">
+        <label for="TipoCriticidade">Tipo de Criticidade</label>
+        <select  type="text" class="form-control" id="TipoCriticidade"  value="{{solicitacao.TipoCriticidade}}" readonly>
+          <option value="N" selected>Normal</option>
+          <option value="E">Emergência</option>
+        </select>
+
+      </div>
+
+      <div class="col-sm-4">
+
+        <span *ngIf=" solicitacao.TipoCriticidade == 'N';then np else np_input"></span>
+        <ng-template #np>
+
+        </ng-template>
+        <ng-template #np_input>
+          <label for="JustificativaEmergencia">Justificativa de Emergência</label>
+          <input type="text"  value="{{solicitacao.JustificativaEmergencia}}"
+            class="form-control" id="JustificativaEmergencia" placeholder="JustificativaEmergencia" readonly/>
+        </ng-template>
+
+
+
+
+      </div>
+    </div>
+    <hr/>
+    <table datatable   class="table table-hover" *ngIf="listMateriais  as materiais; else loading">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>NP</th>
+          <th>NM</th>
+          <th>Descrição do Material</th>
+          <th>NS/TAG</th>
+          <th>BP</th>
+          <th>Qtd. Solicitada</th>
+          <th>Data Sol.</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of materiais">
+          <td>{{ item.Id }}</td>
+          <td>{{ item.NP }}</td>
+          <td>{{ item.NM }}</td>
+          <td>{{ item.DescricaoMaterial }}</td>
+          <td>{{ item.NS }}</td>
+          <td>{{ item.BP }}</td>
+          <td>{{ item.QtdSolicitada }}</td>
+          <td>{{ item.DataSolicitacao }}</td>
+          <td>
+            <span class="float-right">
+              <button class="btn btn-outline-warning mb-1 btn-sm" >
+                Atualizar
+              </button>
+
+              <button class="btn btn-outline-danger mb-1 btn-sm" >
+                Remover
+              </button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #loading>
+      <span>Carregando Materiais...</span>
+    </ng-template>
+
+  </div>
+</div>
+
+
+
+
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="onCloseMaterial()">
+    <span aria-hidden="true">&times;</span>
+</button>

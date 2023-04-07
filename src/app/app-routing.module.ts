@@ -14,7 +14,7 @@ const routes: Routes = [
     path: 'gerencia', loadChildren: () => import('./modulos/gerencia/gerencia.module').then(m => m.GerenciaModule)
   },
   {
-    path: 'centro', loadChildren: () => import('./modulos/centro/centro.module').then(m => m.CentroModule)
+    path: 'resultado', loadChildren: () => import('./modulos/resultado/resultado.module').then(m => m.ResultadoModule)
   },
   {
     path: 'local', loadChildren: () => import('./modulos/local/local.module').then(m => m.LocalModule)

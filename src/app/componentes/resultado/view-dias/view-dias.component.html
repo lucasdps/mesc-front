@@ -1,0 +1,40 @@
+
+<div class="modal-body text-center">
+  <p>Escolha a View</p>
+  <p>
+      <button type="button" class="btn btn-default" (click)="onConfirmOpDias()" >Operações x Dias</button>
+      <button type="button" class="btn btn-default" (click)="onConfirmOpEquipamentoDias()" >Equipamentos x Dias</button>
+      <button type="button" class="btn btn-default" (click)="onConfirmOpFpDias()">FP x Dias</button>
+      <button type="button" class="btn btn-default" (click)="onConfirmOpFsDias()">FS x Dias</button>
+  </p>
+  <button type="button" class="btn btn-default" (click)="onDeclineResultado()">Fechar</button>
+</div>
+<hr />
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mt-3">
+      <div class="card-header">
+        
+      </div>
+      <div class="card-body">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover" style="width:100%">
+        
+        </table>
+
+        <ng-template #loadingVisao>
+          <span>Escolha uma visão</span>
+        </ng-template>
+    <!--
+        <ng-template #loadingError>
+          <div *ngIf="error$ | async; else loading"> Erro ao carregar gerências</div>
+          <ng-template #loading>
+            <span>Carregando Gerências...</span>
+          </ng-template>
+
+        </ng-template>
+
+      -->
+      </div>
+    </div>
+  </div>
+</div>

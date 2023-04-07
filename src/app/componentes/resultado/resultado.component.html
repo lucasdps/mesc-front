@@ -1,0 +1,106 @@
+ <!-- Content Header (Page header) -->
+ <div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Resultados e Otimizações realizadas</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Otimizações</a></li>
+          <li class="breadcrumb-item active">Resultado</li>
+        </ol>
+      </div><!-- /.col -->
+
+    </div><!-- /.row -->
+    <div class="row">
+        <div class="col-md-12">
+          <div class="card mt-3">
+            <div class="card-header">
+              <div class="float-left">
+                <h4>Listagem</h4>
+              </div>
+              <div class="float-right">
+                <!--                <button type="button" class="btn btn-primary" [routerLink]="['novo']">Novo</button>-->
+                <button type="button" class="btn btn-secondary" (click)="onRefresh()">Atualizar</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <table datatable class="table table-hover" *ngIf="resultados$ | async as resultados; else loading">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>idConjuntoEntrada</th>
+                    <th>descricao</th>
+                    <th>status</th>
+                    <th>valorFuncaoObjetivo</th>
+                    <th>qtdVariaveis</th>
+                    <th>qtdRestricoes</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of resultados">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.idConjuntoEntrada }}</td>
+                    <td>{{ item.descricao }}</td>
+                    <td>{{ item.status }}</td>
+                    <td>{{ item.valorFuncaoObjetivo }}</td>
+                    <td>{{ item.qtdVariaveis }}</td>
+                    <td>{{ item.qtdRestricoes }}</td>
+                    <td>
+                      <span class="float-right">
+                        <!--
+                          <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(item.id)">
+                          Atualizar
+                        </button>
+                        -->
+                        <button class="btn btn-outline-info mb-1 btn-sm" (click)="onRelatorio(item)">
+                          Relatórios
+                        </button>
+
+                        <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(item)">
+                          Remover
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <ng-template #loading>
+                <span>Carregando resultados otimizados...</span>
+              </ng-template>
+          <!--
+              <ng-template #loadingError>
+                <div *ngIf="error$ | async; else loading"> Erro ao carregar gerências</div>
+                <ng-template #loading>
+                  <span>Carregando Gerências...</span>
+                </ng-template>
+
+              </ng-template>
+
+            -->
+            </div>
+          </div>
+
+          <ng-template #deleteModal>
+            <div class="modal-body text-center">
+              <p>Tem certeza que deseja remover?</p>
+              <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
+              <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>
+            </div>
+          </ng-template>
+
+          <ng-template #resultadoModal>
+            <app-view-dias
+              [Tipo]="TipoView"
+              [IdResultado]="IdResultado">
+            </app-view-dias>
+          </ng-template>
+        </div>
+     </div>
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+

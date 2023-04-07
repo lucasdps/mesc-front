@@ -10,7 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-entrada',
   templateUrl: './entrada.component.html',
-  styleUrls: ['./entrada.component.css']
+  styleUrls: ['./entrada.component.css'],
+  preserveWhitespaces: true
 })
 export class EntradaComponent implements OnInit {
 
@@ -18,7 +19,7 @@ export class EntradaComponent implements OnInit {
   @ViewChild('deleteModal') deleteModal;
   calculoModalRef: BsModalRef;
   @ViewChild('calculoModal') calculoModal;
-  
+
   entradaSelecionado: Entrada;
   // Observable
   entradas$: Observable<Entrada[]>;
@@ -101,14 +102,6 @@ export class EntradaComponent implements OnInit {
   }
 
 
-  isAreaAtendimento(n){
-    if(n==0){
-      return 'Não';
-    }
-    else{
-      return 'Sim';
-    }
-  }
 
 
 }

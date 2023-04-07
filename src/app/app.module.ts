@@ -50,6 +50,8 @@ import { MaterialComponent } from './componentes/material/material.component';
 import { SolicitacaoFormEditComponent } from './componentes/solicitacao/solicitacao-form-edit/solicitacao-form-edit.component';
 import { EntradaComponent } from './componentes/entrada/entrada.component';
 import { EntradaFormComponent } from './componentes/entrada/entrada-form/entrada-form.component';
+import { ResultadoComponent } from './componentes/resultado/resultado.component';
+import { ViewDiasComponent } from './componentes/resultado/view-dias/view-dias.component';
 
 
 @NgModule({
@@ -87,7 +89,9 @@ import { EntradaFormComponent } from './componentes/entrada/entrada-form/entrada
     MaterialComponent,
     SolicitacaoFormEditComponent,
     EntradaComponent,
-    EntradaFormComponent
+    EntradaFormComponent,
+    ResultadoComponent,
+    ViewDiasComponent
   ],
   imports: [
     BrowserModule,

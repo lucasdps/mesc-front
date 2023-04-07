@@ -1,5 +1,5 @@
 import { environment } from 'src/environments/environment';
-import { Entrada } from './../../modulos/entrada/entrada';
+import { Entrada, Operacao } from './../../modulos/entrada/entrada';
 import { HttpClient } from '@angular/common/http';
 import { take, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
@@ -19,6 +19,10 @@ export class EntradaService {
 
   loadById(id){
     return this.http.get<Entrada>(`${this.API}/${id}`).pipe(take(1));
+  }
+
+  listaOperacoes(id){
+    return this.http.get<Operacao[]>(`${this.API}/ListaOperacoes?id=${id}`).pipe();
   }
 
   CalcularProgramacaoLinear(id){

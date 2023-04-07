@@ -9,3 +9,9 @@ export interface Entrada {
    qtdFP: Number;
    qtdFS: Number;
 }
+
+export interface Operacao {
+  id: number,
+  dataFim: number,
+  dataInicio : number
+}
